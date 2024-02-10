@@ -9,6 +9,13 @@
 ```bash
 .
 ├── examples
+│   ├── startup
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   ├── providers.tf
+│   │   ├── TestRecord.md
+│   │   └── variables.tf
+│   └── with_network_restriction
 ├── LICENSE
 ├── main.tf
 ├── outputs.tf
@@ -23,7 +30,7 @@
 ├── variables.tf
 └── versions.tf
 
-7 directories, 8 files
+9 directories, 13 files
 ```
 
 ## Roadmap
