@@ -66,3 +66,8 @@ test/go.sum
 
 /TestRecord
 **/TestRecord.md.tmp
+
+# .github temp definitions
+.github/workflows/*.yml
+!.github/workflows/go.yml
+.github/*
