@@ -1,6 +1,6 @@
 variable "allowed_cidrs" {
-  type = set(string)
-  default = null
+  type        = list(string)
+  default     = []
   description = "(Optional) The IP ranges to allow for incoming traffic to the registry. The allowed CIRDs are only supported on resources with `Premium` SKU"
 
   validation {
@@ -12,8 +12,8 @@ variable "allowed_cidrs" {
 }
 
 variable "allowed_subnets" {
-  type = set(string)
-  default = null
+  type        = list(string)
+  default     = []
   description = "(Optional) The subnets to allow for incoming traffic to the registry."
 }
 

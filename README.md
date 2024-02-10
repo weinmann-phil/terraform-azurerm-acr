@@ -49,3 +49,4 @@
 ## References
 
 - [Terraform Documentation - Creating Modules](https://developer.hashicorp.com/terraform/language/modules/develop)
+- [Google Documentation - Best practices for using Terraform](https://cloud.google.com/docs/terraform/best-practices-for-terraform)

@@ -3,7 +3,7 @@ data "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_container_registry" "main" {
-  name                = coalesce(var.registry_name, trim("${var.prefix}-acr", "-"))
+  name                = coalesce(var.registry_name, trim("acr${var.prefix}", "-"))
   resource_group_name = data.azurerm_resource_group.main.name
   location            = coalesce(var.location, data.azurerm_resource_group.main.location)
   sku                 = var.sku
@@ -90,7 +90,7 @@ resource "azurerm_container_registry" "main" {
       error_message = "One of either `var.registry_name` and `var.prefix` must be set to create `azurerm_container_registry.main`."
     }
     precondition {
-      condition     = (length(var.allowed_cidrs) > 0 || length(var.allowed_subnets) > 0) && var.sku == "Premium"
+      condition     = ((length(var.allowed_cidrs) > 0 || length(var.allowed_subnets) > 0) && var.sku == "Premium") || var.public_network_access_enabled
       error_message = "Network restrictions "
     }
     precondition {
@@ -98,11 +98,11 @@ resource "azurerm_container_registry" "main" {
       error_message = "Cannot both set `var.public_network_access_enabled` to true and restrict traffic to either allowed CIDRs or subnets."
     }
     precondition {
-      condition     = var.geo_redundant_locations != null && var.sku == "Premium"
+      condition     = (var.geo_redundant_locations != null && var.sku == "Premium") || var.geo_redundant_locations == null
       error_message = "Geo-replication can only be set in container registries with Premium tier SKU."
     }
     precondition {
-      condition     = var.enable_image_retention && var.sku == "Premium"
+      condition     = (var.enable_image_retention == true && var.sku != "Premium") || var.enable_image_retention == false
       error_message = "Retention period can only be set in container registries with a Premium tier SKU."
     }
   }
