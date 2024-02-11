@@ -30,7 +30,7 @@ resource "azurerm_container_registry" "main" {
       default_action = "Deny"
       dynamic "ip_rule" {
         for_each = var.allowed_cidrs
-        
+
         content {
           action   = "Allow"
           ip_range = "${ip_rule.value}/32"
@@ -81,7 +81,7 @@ resource "azurerm_container_registry" "main" {
 
   lifecycle {
     prevent_destroy = true
-    ignore_changes = [ 
+    ignore_changes = [
       tags,
     ]
 
